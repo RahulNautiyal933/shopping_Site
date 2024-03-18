@@ -1,0 +1,68 @@
+<div className="mx-[150px] my-[60px]">
+    <div className="bg-orange-500 grid grid-cols-2 text-center">
+      <h1 className="text-white font-bold m-auto">Your Cart({cartItems.length})</h1>
+      <div>
+    <Button colorScheme="red" variant="solid" onClick={helpClear} className="my-1 justify-end">
+   Clear Cart
+  </Button>
+  </div>
+    </div>
+  <div className="grid grid-cols-6 border space-x-4 pl-10 mt-7">
+    <h1 className="text-black m-auto">Action</h1>
+    <h1 className="text-black m-auto">Product</h1>
+    <h1 className="text-black m-auto">Name</h1>
+    <h1 className="text-black m-auto">Price</h1>
+    <h1 className="text-black m-auto">Quantity</h1>
+    <h1 className="text-black m-auto">Total Price</h1>
+  </div>
+  {
+    cartItems.map((item)=>
+   
+    <div className="grid grid-cols-6 border space-x-4 pl-10 " id={item.id}>
+      <div className="ml-[90px]">
+      <Button colorScheme="orange" variant="solid" onClick={helpPop} className="my-1">
+    Pop
+  </Button>
+      </div>
+      <div>
+        <img src={IMG_CDN_URL+item.imageId} className="w-[50px] my-1"></img>
+      </div>
+    <h1 className="text-black text-clip truncate m-auto">{item.name}</h1>
+    <h1 className="te`xt-black m-auto">{item.price}</h1>
+    <div className="grid grid-cols-3">
+      <div>
+      <p className="text-black bg-orange-200  my-[10px] text-center mx-5" onClick={item.inStock<=1?()=>helpPop():()=>helpSinglePop(item)} >-</p>
+      </div>
+      
+    <h1 className="text-black text-center my-[10px]">{item.inStock}</h1>
+    <div>
+    <p className="text-black bg-orange-200  my-[10px] text-center mx-5" onClick={()=>handleAddItem(item)} >+</p>
+    </div>
+    
+    </div>
+    <h1 className="text-black ml-[20px] my-[10px]">{item.inStock*item.price}</h1>
+  </div>
+  
+    )
+  }
+
+  {/* <div className="grid grid-cols-4 space-x-2">
+    <h1 className="text-black">{cartItems.map((item) => item.name)}</h1>
+  </div> */}
+  <hr className="border-gray-800 my-8" />
+  <div className="flex flex-row bottom-0 right-0">
+
+  <div className="container flex flex-col items-center">
+    <Button colorScheme="orange" variant="solid" onClick={()=>{makePayment();handleCheckOut();}} className="my-1">
+   Checkout
+  </Button>
+
+  </div>
+
+    <div className="grid grid-cols-2">
+    <h1 className="text-black m-auto text-lg">Total Price:</h1>
+    <h1 className="text-black m-auto text-lg">₹ {cartHelper(cartItems)}</h1>
+    </div>
+
+  </div>
+  </div>
